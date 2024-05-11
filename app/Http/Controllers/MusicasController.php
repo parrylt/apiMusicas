@@ -2,20 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\album;
+use App\Models\musicas;
 use Illuminate\Http\Request;
 
-class AlbumController extends Controller
+class MusicasController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $dadosAlbum = album::All();
-        $contador = $dadosAlbum->count();
+        $dadosMusicas = musicas::All();
+        $contador = $dadosMusicas->count();
 
-        return 'Este Album contem: '.$contador.$dadosAlbum.Response()->json([],Response::HTTP_NO_CONTENT);
+        return 'Musicas: '.$contador.$dadosMusicas.Response()->json([],Response::HTTP_NO_CONTENT);
     }
 
     /**
@@ -23,11 +23,11 @@ class AlbumController extends Controller
      */
     public function store(Request $request)
     {
-        $dadosAlbum = $request->all();
-        $validarDados = Validator::make($dadosAlbum,[
+        $dadosMusicas = $request->all();
+        $validarDados = Validator::make($dadosMusicas,[
             'nome' => 'required',
-            'ano' => 'required',
-            'quantidade'=> 'required',
+            'tempo' => 'required',
+            'compositores'=> 'required',
             'id'=> 'required',
         ]);
 
@@ -35,8 +35,8 @@ class AlbumController extends Controller
             return 'Dados Invalidos.'.$validarDados->error(true). 500;
         }
 
-        $albumCadastrar = album::create($dadosAlbum);
-        if($albumCadastrar){
+        $musicasCadastrar = musicas::create($dadosMusicas);
+        if($musicasCadastrar){
             return 'Dados cadastrados com sucesso.'.Response()->json([],Response::HTTP_NO_CONTENT);
         }else{
             return 'Dados não cadastrados.'.Response()->json([],Response::HTTP_NO_CONTENT);
@@ -48,12 +48,12 @@ class AlbumController extends Controller
      */
     public function show(string $id)
     {
-        $album = Album::find($id);
+        $musica = musica::find($id);
 
-        if($album){
-            return 'Album Localizada.'. $album.Response()->json([],Response::HTTP_NO_CONTENT);
+        if($musica){
+            return 'Musica Localizada.'. $musica.Response()->json([],Response::HTTP_NO_CONTENT);
         }else{
-            return 'Album não localizada.'.Response()->json([],Response::HTTP_NO_CONTENT);
+            return 'Musica não localizada.'.Response()->json([],Response::HTTP_NO_CONTENT);
         }
     }
 
@@ -62,11 +62,11 @@ class AlbumController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $dadosAlbum = $request->all();
-        $validarDados = Validator::make($dadosAlbum,[
+        $dadosMusicas = $request->all();
+        $validarDados = Validator::make($dadosMusicas,[
             'nome' => 'required',
-            'ano' => 'required',
-            'quantidade'=> 'required',
+            'tempo' => 'required',
+            'compositores'=> 'required',
             'id'=> 'required',
         ]);
 
@@ -74,13 +74,13 @@ class AlbumController extends Controller
             return 'Dados Invalidos.'.$validarDados->error(true). 500;
         }
 
-        $album = Album::find($id);
-        $album->nome = $dadosAlbum['nome'];
-        $album->ano = $dadosAlbum['ano'];
-        $album->quantidade = $dadosAlbum['quantidade'];
-        $album->id = $dadosAlbum['id'];
+        $musica = Moto::find($id);
+        $musica->nome = $dadosMusicas['nome'];
+        $musica->tempo = $dadosMusicas['tempo'];
+        $musica->compositores = $dadosMusicas['compositores'];
+        $musica->id = $dadosMusicas['id'];
 
-        $retorno = $album->save();
+        $retorno = $musica->save();
 
         if($retorno){
             return 'Dados atualizados com sucesso.'.Response()->json([],Response::HTTP_NO_CONTENT);
@@ -92,14 +92,14 @@ class AlbumController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy (string $id)
+    public function destroy(string $id)
     {
-        $dadosAlbum = Album::find($id);
+        $dadosMusicas = Musicas::find($id);
         
-        if ($dadosAlbum->delete()){
-            return 'O album foi deletado com sucesso!';
+        if ($dadosMusicas->delete()){
+            return 'O musica foi deletado com sucesso!';
         }
 
-        return 'O album não foi deletado.'. response()->json([],Response::HTTP_NO_CONTENT);
+        return 'O musica não foi deletado.'. response()->json([],Response::HTTP_NO_CONTENT);
     }
 }

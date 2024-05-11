@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('albums', function (Blueprint $table) {
+        Schema::create('musicas', function (Blueprint $table) {
             $table->id();
             $table->string('nome');
-            $table->string('ano');
-            $table->decimal('quantidade');
-            $table->foreign('id')->references('id')->on('artista');
+            $table->string('tempo');
+            $table->string('compositores');
+            $table->foreign('id')->references('id')->on('album');
             $table->timestamps();
         });
     }
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('albums');
+
     }
 };

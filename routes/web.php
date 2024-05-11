@@ -21,3 +21,12 @@ route::get('/album/{id}',[AlbumController::class,'show']);
 route::post('/album',[AlbumController::class,'store']);
 route::delete('/album/{id}', [AlbumController::class, 'destroy']);
 route::put('/album/{id}', [AlbumController::class, 'update']);
+
+//musicas//
+
+route::get('/', function(){return response()->json(['Sucesso'=>true]);});
+route::get('/musica',[MusicasController::class, 'index']);
+route::get('/musica/{id}',[MusicasController::class,'show']);
+route::post('/musica',[MusicasController::class,'store']);
+route::delete('/musica/{id}', [MusicasController::class, 'destroy']);
+route::put('/musica/{id}', [MusicasController::class, 'update']);
