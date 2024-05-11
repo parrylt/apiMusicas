@@ -1,0 +1,9 @@
+banco tabelas
+1 artista
+-- 1 nome, 2 genero, 3 pais 
+
+1 album
+-- 1 nome, 2 ano, 3 quantidade, 4 artista_id
+
+1 musicas
+-- 1 nome, 2 duracao, 3 compositores, 4 id_album
