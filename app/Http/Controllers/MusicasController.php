@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\musicas;
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Validator;
 
 class MusicasController extends Controller
 {
@@ -97,9 +100,9 @@ class MusicasController extends Controller
         $dadosMusicas = Musicas::find($id);
         
         if ($dadosMusicas->delete()){
-            return 'O musica foi deletado com sucesso!';
+            return 'A musica foi deletado com sucesso!';
         }
 
-        return 'O musica não foi deletado.'. response()->json([],Response::HTTP_NO_CONTENT);
+        return 'A musica não foi deletado.'. response()->json([],Response::HTTP_NO_CONTENT);
     }
 }

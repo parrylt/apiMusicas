@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('nome');
             $table->string('tempo');
             $table->string('compositores');
-            $table->foreign('id')->references('id')->on('album');
+            $table->foreign('id')->references('id')->on('albums');
             $table->timestamps();
         });
     }

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('nome');
             $table->string('ano');
             $table->decimal('quantidade');
-            $table->foreign('id')->references('id')->on('artista');
+            $table->foreign('id')->references('id')->on('artistas');
             $table->timestamps();
         });
     }
